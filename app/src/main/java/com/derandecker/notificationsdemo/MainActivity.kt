@@ -36,6 +36,9 @@ class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
+//        BitmapFactory.decodeResource(applicationContext.resources, R.drawable.dog)
+
+//        Log.d("TAG", applicationContext.resources.toString())
         enableEdgeToEdge()
         createNotificationChannel()
         setContent {
@@ -75,17 +78,19 @@ class MainActivity : ComponentActivity() {
         notificationManager.createNotificationChannel(channel)
     }
 
-    var builder = NotificationCompat.Builder(this, "Main")
-        .setSmallIcon(R.drawable.ic_launcher_foreground)
-        .setContentTitle("This is the title")
-        .setContentText("Here is some content for the notification")
-        .setStyle(
-            NotificationCompat.BigPictureStyle()
-                .bigPicture(
-                    BitmapFactory.decodeResource(applicationContext.resources, R.drawable.dog)
-                )
-        )
-        .setPriority(NotificationCompat.PRIORITY_DEFAULT)
+    val builder by lazy {
+        NotificationCompat.Builder(this, "Main")
+            .setSmallIcon(R.drawable.ic_launcher_foreground)
+            .setContentTitle("This is the title")
+            .setContentText("Here is some content for the notification")
+            .setStyle(
+                NotificationCompat.BigPictureStyle()
+                    .bigPicture(
+                        BitmapFactory.decodeResource(applicationContext.resources, R.drawable.dog)
+                    )
+            )
+            .setPriority(NotificationCompat.PRIORITY_DEFAULT)
+    }
 
 
     @RequiresApi(Build.VERSION_CODES.TIRAMISU)
