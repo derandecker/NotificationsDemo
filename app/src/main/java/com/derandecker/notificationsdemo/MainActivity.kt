@@ -5,6 +5,7 @@ import android.app.NotificationChannel
 import android.app.NotificationManager
 import android.content.Context
 import android.content.pm.PackageManager
+import android.graphics.BitmapFactory
 import android.os.Build
 import android.os.Bundle
 import android.util.Log
@@ -25,11 +26,9 @@ import androidx.core.app.ActivityCompat
 import androidx.core.app.NotificationCompat
 import androidx.core.app.NotificationManagerCompat
 import androidx.core.content.ContextCompat
-import androidx.lifecycle.lifecycleScope
 import com.derandecker.notificationsdemo.ui.theme.NotificationsDemoTheme
-import kotlinx.coroutines.launch
 
-const val NOT_ID = 1
+const val NOT_ID = 2
 
 
 class MainActivity : ComponentActivity() {
@@ -80,7 +79,14 @@ class MainActivity : ComponentActivity() {
         .setSmallIcon(R.drawable.ic_launcher_foreground)
         .setContentTitle("This is the title")
         .setContentText("Here is some content for the notification")
+        .setStyle(
+            NotificationCompat.BigPictureStyle()
+                .bigPicture(
+                    BitmapFactory.decodeResource(applicationContext.resources, R.drawable.dog)
+                )
+        )
         .setPriority(NotificationCompat.PRIORITY_DEFAULT)
+
 
     @RequiresApi(Build.VERSION_CODES.TIRAMISU)
     fun showNotification() {
